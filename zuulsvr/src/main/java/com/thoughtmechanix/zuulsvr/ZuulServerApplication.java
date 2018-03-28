@@ -17,9 +17,13 @@ import java.util.List;
 @EnableZuulProxy
 public class ZuulServerApplication {
 
+    public static void main(String[] args) {
+        SpringApplication.run(ZuulServerApplication.class, args);
+    }
+
     @LoadBalanced
     @Bean
-    public RestTemplate getRestTemplate(){
+    public RestTemplate getRestTemplate() {
         RestTemplate template = new RestTemplate();
         List interceptors = template.getInterceptors();
         if (interceptors == null) {
@@ -30,10 +34,6 @@ public class ZuulServerApplication {
         }
 
         return template;
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(ZuulServerApplication.class, args);
     }
 }
 

@@ -17,7 +17,7 @@ public final class DelegatingUserContextCallable<V> implements Callable<V> {
     private UserContext originalUserContext;
 
     public DelegatingUserContextCallable(Callable<V> delegate,
-                                             UserContext userContext) {
+                                         UserContext userContext) {
         Assert.notNull(delegate, "delegate cannot be null");
         Assert.notNull(userContext, "userContext cannot be null");
         this.delegate = delegate;
@@ -28,13 +28,17 @@ public final class DelegatingUserContextCallable<V> implements Callable<V> {
         this(delegate, UserContextHolder.getContext());
     }
 
+    public static <V> Callable<V> create(Callable<V> delegate,
+                                         UserContext userContext) {
+        return new DelegatingUserContextCallable<V>(delegate, userContext);
+    }
+
     public V call() throws Exception {
-        UserContextHolder.setContext( originalUserContext );
+        UserContextHolder.setContext(originalUserContext);
 
         try {
             return delegate.call();
-        }
-        finally {
+        } finally {
 
             this.originalUserContext = null;
         }
@@ -42,11 +46,5 @@ public final class DelegatingUserContextCallable<V> implements Callable<V> {
 
     public String toString() {
         return delegate.toString();
-    }
-
-
-    public static <V> Callable<V> create(Callable<V> delegate,
-                                         UserContext userContext) {
-        return new DelegatingUserContextCallable<V>(delegate, userContext);
     }
 }

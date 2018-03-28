@@ -17,23 +17,22 @@ import java.util.List;
 @EnableCircuitBreaker
 public class Application {
 
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
     @LoadBalanced
     @Bean
-    public RestTemplate getRestTemplate(){
+    public RestTemplate getRestTemplate() {
         RestTemplate template = new RestTemplate();
         List interceptors = template.getInterceptors();
-        if (interceptors==null){
+        if (interceptors == null) {
             template.setInterceptors(Collections.singletonList(new UserContextInterceptor()));
-        }
-        else{
+        } else {
             interceptors.add(new UserContextInterceptor());
             template.setInterceptors(interceptors);
         }
 
         return template;
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
     }
 }

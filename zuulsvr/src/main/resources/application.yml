@@ -18,6 +18,9 @@ eureka:
         defaultZone: http://localhost:8761/eureka/
 
 zuul:
-  prefix:  /api
+  #prefix:  /api
+#  routes:
+#    organizationservice: /organization/**
   routes:
-  organizationservice: /organization/**
+    configserver: /cs/**
+  ignored-services: '*'

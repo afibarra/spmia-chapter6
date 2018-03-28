@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 
-public class ThreadLocalAwareStrategy extends HystrixConcurrencyStrategy{
+public class ThreadLocalAwareStrategy extends HystrixConcurrencyStrategy {
     private HystrixConcurrencyStrategy existingConcurrencyStrategy;
 
     public ThreadLocalAwareStrategy(

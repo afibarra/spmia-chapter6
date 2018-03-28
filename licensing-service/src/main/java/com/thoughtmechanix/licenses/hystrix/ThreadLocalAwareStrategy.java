@@ -5,7 +5,6 @@ import com.netflix.hystrix.strategy.concurrency.HystrixConcurrencyStrategy;
 import com.netflix.hystrix.strategy.concurrency.HystrixRequestVariable;
 import com.netflix.hystrix.strategy.concurrency.HystrixRequestVariableLifecycle;
 import com.netflix.hystrix.strategy.properties.HystrixProperty;
-import com.thoughtmechanix.licenses.utils.UserContext;
 import com.thoughtmechanix.licenses.utils.UserContextHolder;
 
 import java.util.concurrent.BlockingQueue;
@@ -14,7 +13,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 
-public class ThreadLocalAwareStrategy extends HystrixConcurrencyStrategy{
+public class ThreadLocalAwareStrategy extends HystrixConcurrencyStrategy {
     private HystrixConcurrencyStrategy existingConcurrencyStrategy;
 
     public ThreadLocalAwareStrategy(
